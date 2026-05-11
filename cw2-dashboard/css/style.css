@@ -1,0 +1,325 @@
+/* --- GLOBAL VARIABLES --- */
+:root {
+    --bg-dark: #0f172a;
+    --surface: #1e293b;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+/* --- COMMON COMPONENTS --- */
+input,
+select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-dark);
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-full {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn-logout {
+    width: 100%;
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- 1. LOGIN PAGE STYLES --- */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-card {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: var(--text-muted);
+}
+
+.toggle-link {
+    color: #60a5fa;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 15px;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.toggle-link:hover {
+    color: white;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: none;
+    font-size: 0.9em;
+}
+
+.alert.error {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid var(--danger);
+}
+
+.alert.success {
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+    border: 1px solid var(--success);
+}
+
+/* --- 2. DASHBOARD LAYOUT STYLES --- */
+.app-layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    border-left: 4px solid transparent;
+}
+
+.nav-btn:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--text-main);
+}
+
+.nav-btn.active {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+}
+
+.logout-container {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background-color: var(--bg-dark);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.tab-section {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.tab-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Charts & Analytics */
+.filters-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.canvas-container {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+
+/* Prevents Charts from exploding */
+
+/* Tables (Security Logs) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+code {
+    background: var(--bg-dark);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--success);
+}
+
+
+/* --- CHART EXPORT BUTTON --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-header h4 {
+    margin: 0;
+}
+
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--text-main);
+    border-color: var(--primary);
+}
+
+/* CSS Class to hide elements from PDF Export */
+.data-exclude {
+    display: block !important;
+}
+
+.data-exclude:not(.canvas-container) {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}

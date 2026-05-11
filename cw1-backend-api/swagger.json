@@ -1,0 +1,146 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Alumni Portal API",
+        "description": "API documentation for the University Alumni Portal Backend",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000",
+            "description": "Local Development Server"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "summary": "Register a new user",
+                "tags": [
+                    "Authentication"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "student@university.edu"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "securepassword123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    }
+                }
+            }
+        },
+        "/api/profiles/me": {
+            "post": {
+                "summary": "Create or update user profile",
+                "tags": [
+                    "Profiles"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "bio": {
+                                        "type": "string"
+                                    },
+                                    "current_location": {
+                                        "type": "string",
+                                        "example": "London, UK"
+                                    },
+                                    "degrees": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "employment": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profile updated successfully"
+                    },
+                    "201": {
+                        "description": "Profile created successfully"
+                    }
+                }
+            }
+        },
+        "/api/analytics/dashboard-data": {
+            "get": {
+                "summary": "Get aggregate data for the analytics dashboard",
+                "tags": [
+                    "Analytics"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "prog",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter by degree name"
+                    },
+                    {
+                        "in": "query",
+                        "name": "year",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter by graduation year"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of dashboard metrics"
+                    }
+                }
+            }
+        }
+    }
+}
